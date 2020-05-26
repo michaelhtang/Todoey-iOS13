@@ -25,6 +25,7 @@ class CategoryViewController: UITableViewController {
     
     
     //MARK: - TableView Datasource Methods
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categoryArray.count
     
@@ -38,10 +39,9 @@ class CategoryViewController: UITableViewController {
         return cell
     }
       //MARK: - TableView Delegate Methods
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToItems", sender: self)
-        
-
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -72,6 +72,7 @@ class CategoryViewController: UITableViewController {
             tableView.reloadData()
             }
     //MARK: - Add New Categories
+   
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         var textField = UITextField()
         let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
