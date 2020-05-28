@@ -36,21 +36,25 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+//
         if let item = todoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
-        
-        //Ternary operator
-        //Value = condition ? valueIfTrue : valueIfFalse
-        
+//
+//        //Ternary operator
+//        //Value = condition ? valueIfTrue : valueIfFalse
+//
             cell.accessoryType = item.done ? .checkmark : .none
     } else {
             cell.textLabel?.text = "No Items Added"
-        }
+        
     
+        
+    }
         return cell
     }
+    
     //MARK: - TableView Delegate Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -61,8 +65,15 @@ class TodoListViewController: UITableViewController {
 //        enable instead of done property toggle to delete entries
 //        context.delete(itemArray[indexPath.row])
 //        itemArray.remove(at: indexPath.row)
-        
-        
+        if let item = todoItems?[indexPath.row] {
+        do {
+        try realm.write {
+            item.done =  !item.done
+            }
+        } catch {
+            print("error while saving done status \(error)")
+        }
+            tableView.reloadData()
         
         
         //        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
@@ -74,6 +85,7 @@ class TodoListViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
+        }
     
     //MARK: - Add New Items
     
@@ -137,3 +149,4 @@ class TodoListViewController: UITableViewController {
 //        }
 //    }
 //}
+
