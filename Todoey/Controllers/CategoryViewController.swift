@@ -31,6 +31,16 @@ class CategoryViewController: SwipeTableViewController {
             fatalError("Navigation controller does not exist")
         }
         navBar.isTranslucent = false
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.backgroundColor = UIColor(hexString: "1D9BF6")
+            navBar.standardAppearance = navBarAppearance
+            navBar.scrollEdgeAppearance = navBarAppearance
+        } else {
+            // Fallback on earlier versions
+        }
+        
         navBar.backgroundColor = UIColor(hexString: "1D9BF6")
         navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
