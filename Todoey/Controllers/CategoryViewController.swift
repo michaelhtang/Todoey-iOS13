@@ -32,17 +32,20 @@ class CategoryViewController: SwipeTableViewController {
         }
         navBar.isTranslucent = false
         if #available(iOS 13.0, *) {
+            navBar.backgroundColor = UIColor(hexString: "1D9BF6")
+            navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.backgroundColor = UIColor(hexString: "1D9BF6")
             navBar.standardAppearance = navBarAppearance
             navBar.scrollEdgeAppearance = navBarAppearance
+            
         } else {
             // Fallback on earlier versions
         }
         
-        navBar.backgroundColor = UIColor(hexString: "1D9BF6")
-        navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
     }
     
     //MARK: - TableView Datasource Methods
