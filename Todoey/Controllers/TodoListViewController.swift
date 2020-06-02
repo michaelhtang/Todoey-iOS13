@@ -40,10 +40,27 @@ class TodoListViewController: SwipeTableViewController {
             title = selectedCategory!.name
             
             navigationController?.navigationBar.backgroundColor = UIColor(hexString: colorhex)
+            
             if let navbarcolor = UIColor(hexString: colorhex) {
                 navigationController?.navigationBar.tintColor = ContrastColorOf(navbarcolor, returnFlat: true)
                 searchBar.barTintColor = UIColor(hexString: selectedCategory!.color)
-                navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(navbarcolor, returnFlat: true)]
+//                navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+                if #available(iOS 13.0, *) {
+//                    let appearance = UINavigationBarAppearance()
+//                    appearance.backgroundColor = UIColor(hexString: colorhex)
+                    let coloredAppearance = UINavigationBarAppearance()
+                    coloredAppearance.largeTitleTextAttributes = [.foregroundColor: ContrastColorOf(navbarcolor, returnFlat: true)]
+                    coloredAppearance.configureWithOpaqueBackground()
+                    coloredAppearance.backgroundColor = UIColor(hexString: colorhex)
+                    navigationController?.navigationBar.scrollEdgeAppearance = coloredAppearance
+                    navigationController?.navigationBar.standardAppearance = coloredAppearance
+                    
+                    
+                } else {
+                    // Fallback on earlier versions
+                }
+                
             }
         }
     }
